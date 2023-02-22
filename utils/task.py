@@ -52,7 +52,7 @@ class Item:
 # item.name = 'Смартфон'
 # print(item.name)
 # print(item)
-# item.name = 'ggggggggggggg'
+# item.name = 'СуперСмартфон'
 # print(item)
 #Item.instantiate_from_csv()
 #print(Item.all)

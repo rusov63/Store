@@ -1,30 +1,64 @@
-class Store:
-    discount = 0.9
+import csv
 
-    def __init__(self, product_name, unit_price, quantity):
-        """Название товара, цена за единицу и количество товара в магазине"""
-        self.product_name = product_name
-        self.unit_price = unit_price
-        self.quantity = quantity
+class Item:
+    pay_rate = 1
+    all = []
 
-    def total_cost(self):
-        """Общая стоимость товара"""
-        return self.quantity * self.unit_price
+    def __init__(self, name, price, count):
+        self.__name = name
+        self.price = price
+        self.count = count
+        Item.all.append(self)
 
-    def price_discount(self):
-        """Скидка для товара"""
-        return self.unit_price * self.discount
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, name):
+        if len(name) > 10:
+            raise Exception('Длина наименования товара превышает 10 символов')
+        self.__name = name
+
+    def calculate_total_price(self):
+        return self.price * self.count
+
+    def apply_discount(self):
+        self.price = self.price * self.pay_rate
+
+    @classmethod
+    def instantiate_from_csv(cls):
+        with open('items.csv', 'r', encoding='windows-1251') as f:
+            reader = csv.reader(f)
+            rows = []
+            for row in reader:
+                rows.append(row)
+            for a in rows[1:len(rows)]:
+                if Item.is_integer(float(a[1])):
+                    a[1] = int(a[1])
+                if Item.is_integer(float(a[2])):
+                    a[2] = int(a[2])
+                cls(a[0], a[1], a[2])
+
+    @staticmethod
+    def is_integer(num):
+        if num - int(num) == 0:
+            return True
+        else:
+            return False
+
+# item = Item("Ноутбук", 20000, 5)
+# print(item)
+# item.name = 'Смартфон'
+# print(item.name)
+# print(item)
+# item.name = 'СуперСмартфон'
+# print(item)
+#Item.instantiate_from_csv()
+#print(Item.all)
+#print(len(Item.all))
+# print(Item.is_integer(5))
+# print(Item.is_integer(5.0))
+# print(Item.is_integer(5.5))
 
 
-store = Store('laptop_asus', 30_000, 6)
-print(store.product_name)
-store.total_cost()
-print(f'Общая стоимость товара: {store.total_cost()}')
-store.price_discount()
-print(f'Стоимость товара с учетом скидки: {store.unit_price}')
-
-store1 = Store('tablet_lenovo', 15_000, 10)
-print(store1.product_name)
-print(f'Общая стоимость товара: {store1.total_cost()}')
-store1.price_discount()
-print(f'Стоимость товара с учетом скидки: {store1.unit_price}')

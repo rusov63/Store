@@ -1,5 +1,4 @@
 import csv
-
 class Item:
     pay_rate = 1
     all = []
@@ -46,19 +45,13 @@ class Item:
             return True
         else:
             return False
+    def __repr__(self):
+        return f"Item('{self.name}', '{self.price}', '{self.count}')"
+    def __str__(self):
+        return f'{self.name}'
 
-# item = Item("Ноутбук", 20000, 5)
-# print(item)
-# item.name = 'Смартфон'
-# print(item.name)
-# print(item)
-# item.name = 'СуперСмартфон'
-# print(item)
-#Item.instantiate_from_csv()
-#print(Item.all)
-#print(len(Item.all))
-# print(Item.is_integer(5))
-# print(Item.is_integer(5.0))
-# print(Item.is_integer(5.5))
+item1 = Item("Смартфон", 10_000, 20)
+print(repr(item1))
+print(item1)
 
 

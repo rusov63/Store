@@ -1,4 +1,12 @@
-from utils.task import Item
+from utils.task import Item, Phone
+
+def test__init_item__():
+    """инициализация экземпляра класса"""
+    item1 = Item('Xiaomi Lite 10', 30_000, 10)
+    assert item1.name == "Xiaomi Lite 10"
+    assert item1.price == 30_000
+    assert item1.count == 10
+
 def test_calculate_total_price():
     item = Item("Ноутбук", 20000, 5)
     assert item.calculate_total_price() == 100_000
@@ -14,5 +22,22 @@ def test__repr__():
 
 def test__str__():
     item = Item("Ноутбук", 20000, 5)
-    assert item.__str__() != Item('Смартфон', '10000', '20')
+    assert item.__str__() != Item('Смартфон', 10000, 20)
+
+def test__init_phone__():
+    """инициализация экземпляра класса"""
+    phone1 = Phone('Iphone 14', 120_000, 5, 2)
+    assert phone1.name == "Iphone 14"
+    assert phone1.price == 120_000
+    assert phone1.count == 5
+    assert phone1.sim_kart == 2
+
+def test__add__():
+    """Сложение экземпляров классов (количество товара - count)"""
+    item1 = Item('Xiaomi Lite 10', 30_000, 10)
+    phone1 = Phone('Iphone 14', 120_000, 5, 2)
+    assert item1.count + phone1.count
+    assert item1.count + phone1.price != ValueError
+    assert item1.count + phone1.sim_kart != ValueError
+
 

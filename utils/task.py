@@ -3,7 +3,8 @@ class Item:
     pay_rate = 1
     all = []
 
-    def __init__(self, name, price, count):
+    def __init__(self, name: object, price: object, count: object) -> object:
+        """Название товара, цена за единицу и количество товара в магазине"""
         self.__name = name
         self.price = price
         self.count = count
@@ -19,10 +20,12 @@ class Item:
             raise Exception('Длина наименования товара превышает 10 символов')
         self.__name = name
 
-    def calculate_total_price(self):
+    def calculate_total_price(self) -> int:
+        """Общая стоимость товара"""
         return self.price * self.count
 
-    def apply_discount(self):
+    def apply_discount(self) -> int:
+        """Скидка для товара"""
         self.price = self.price * self.pay_rate
 
     @classmethod
@@ -50,8 +53,27 @@ class Item:
     def __str__(self):
         return f'{self.name}'
 
-item1 = Item("Смартфон", 10_000, 20)
-print(repr(item1))
-print(item1)
+    def __add__(self, other):
+        """Сложение количества товара. """
+        if isinstance(other, Item):
+            return self.count + other.count
+        else:
+            raise ValueError('Сложение с другими аргументами класса запрещено')
+
+class Phone(Item):
+    """Класс телефон, наследственный класс."""
+
+    def __init__(self, name, price, count, sim_kart):
+        """Инициализация нового атрибута - количество сим карт."""
+        super().__init__(name, price, count)
+        self.sim_kart = sim_kart
+
+
+item1 = Item('Xiaomi Lite 10', 30_000, 10)
+phone1 = Phone('Iphone 14', 120_000, 5, 2)
+print(phone1) # Iphone 14.
+print(repr(phone1)) # Item('Iphone 14', '120000', '5').
+print(repr(item1)) # Item('Xiaomi Lite 10', '30000', '10').
+print(phone1 + item1) # 15.
 
 

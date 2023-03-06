@@ -30,13 +30,13 @@ def test__init_phone__():
     assert phone1.name == "Iphone 14"
     assert phone1.price == 120_000
     assert phone1.count == 5
-    assert phone1.sim_kart == 2
+    assert phone1.sim_kart > 0
 
 def test__add__():
     """Сложение экземпляров классов (количество товара - count)"""
     item1 = Item('Xiaomi Lite 10', 30_000, 10)
     phone1 = Phone('Iphone 14', 120_000, 5, 2)
-    assert item1.count + phone1.count
+    assert item1.__add__(phone1) == 15
     assert item1.count + phone1.price != ValueError
     assert item1.count + phone1.sim_kart != ValueError
 

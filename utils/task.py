@@ -66,11 +66,15 @@ class Phone(Item):
     def __init__(self, name, price, count, sim_kart):
         """Инициализация нового атрибута - количество сим карт."""
         super().__init__(name, price, count)
-        self.sim_kart = sim_kart
+        self.__sim_kart = sim_kart
+        if sim_kart == 0:
+            raise ValueError('Количество физических Sim карт должно быть целым число больше нуля.')
+        else:
+            self.__sim_kart = sim_kart
 
 
 item1 = Item('Xiaomi Lite 10', 30_000, 10)
-phone1 = Phone('Iphone 14', 120_000, 5, 2)
+phone1 = Phone('Iphone 14', 120_000, 5, 5)
 print(phone1) # Iphone 14.
 print(repr(phone1)) # Item('Iphone 14', '120000', '5').
 print(repr(item1)) # Item('Xiaomi Lite 10', '30000', '10').

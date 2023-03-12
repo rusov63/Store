@@ -1,4 +1,4 @@
-from utils.task import Item, Phone
+from utils.task import Item, Phone, KeyBoard
 
 def test__init_item__():
     """инициализация экземпляра класса"""
@@ -37,5 +37,16 @@ def test__add__():
     phone1 = Phone('Iphone 14', 120_000, 5, 2)
     assert item1.__add__(phone1) == 15
     assert item1.count + phone1.price != ValueError
+
+def test__init__():
+    kb = KeyBoard('Dark Project KD87A', 9600, 5)
+    assert kb.name == 'Dark Project KD87A'
+    assert kb.price == 9600
+    assert kb.count == 5
+
+def test_KeyBoard():
+    kb = KeyBoard('Dark Project KD87A', 9600, 5)
+    assert kb.language == 'EN'
+    assert kb.change_lang() != 'RU'
 
 

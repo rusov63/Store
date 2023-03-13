@@ -72,9 +72,42 @@ class Phone(Item):
         else:
             self.__sim_kart = sim_kart
 
+class MixinLog:
+    def __init__(self, name, price, count):
+        """Иницализация названия, стоимости и кол-во клавиатуры,"""
+        self.__language = 'EN'
+        super().__init__(name, price, count)
+
+    @property
+    def language(self):
+        return self.__language
+
+    def change_lang(self):
+        """Изменение языка раскладка клавиатуры EN - RU"""
+        if self.__language == 'EN':
+            self.__language = 'RU'
+        else:
+            self.__language = 'EN'
+
+class KeyBoard(MixinLog, Item):
+    """Клавиатура"""
+    pass
+
 
 item1 = Item('Xiaomi Lite 10', 30_000, 10)
 phone1 = Phone('Iphone 14', 120_000, 5, 5)
+
+kb = KeyBoard('Dark Project KD87A', 9600, 5)
+print(kb) # Dark Project KD87A.
+print(kb.language) # EN.
+kb.change_lang()
+print(kb.language) # RU.
+
+#kb.language = 'CH'
+#AttributeError: property 'language' of 'KeyBoard' object has no setter
+
+
+# Принты из прошлого задания
 print(phone1) # Iphone 14.
 print(repr(phone1)) # Item('Iphone 14', '120000', '5').
 print(repr(item1)) # Item('Xiaomi Lite 10', '30000', '10').

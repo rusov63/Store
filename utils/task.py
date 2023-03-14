@@ -1,4 +1,8 @@
 import csv
+
+class InstantiateCSVError(Exception):
+    pass
+
 class Item:
     pay_rate = 1
     all = []
@@ -30,17 +34,23 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        with open('items.csv', 'r', encoding='windows-1251') as f:
-            reader = csv.reader(f)
-            rows = []
-            for row in reader:
-                rows.append(row)
+        try:
+            with open('items.csv', 'r', encoding='windows-1251') as f:
+                reader = csv.reader(f)
+                rows = []
+                for row in reader:
+                    rows.append(row)
+
             for a in rows[1:len(rows)]:
                 if Item.is_integer(float(a[1])):
                     a[1] = int(a[1])
                 if Item.is_integer(float(a[2])):
                     a[2] = int(a[2])
                 cls(a[0], a[1], a[2])
+        except FileNotFoundError:
+            print('Отсутствует файл item.csv')
+        except:
+            raise InstantiateCSVError('Файл items.csv поврежден')
 
     @staticmethod
     def is_integer(num):
@@ -48,8 +58,10 @@ class Item:
             return True
         else:
             return False
+
     def __repr__(self):
         return f"Item('{self.name}', '{self.price}', '{self.count}')"
+
     def __str__(self):
         return f'{self.name}'
 
@@ -93,15 +105,24 @@ class KeyBoard(MixinLog, Item):
     """Клавиатура"""
     pass
 
+# Файл items.csv отсутствует.
+Item.instantiate_from_csv() # FileNotFoundError: Отсутствует файл item.csv
+print(Item.all)
+
+# В файле items.csv удалена последняя колонка.
+Item.instantiate_from_csv() # InstantiateCSVError: Файл item.csv поврежден
 
 item1 = Item('Xiaomi Lite 10', 30_000, 10)
+
 phone1 = Phone('Iphone 14', 120_000, 5, 5)
 
 kb = KeyBoard('Dark Project KD87A', 9600, 5)
-print(kb) # Dark Project KD87A.
-print(kb.language) # EN.
-kb.change_lang()
-print(kb.language) # RU.
+
+# ПРинты с прошлой домашки 15.2
+# print(kb) # Dark Project KD87A.
+# print(kb.language) # EN.
+# kb.change_lang()
+# print(kb.language) # RU.
 
 #kb.language = 'CH'
 #AttributeError: property 'language' of 'KeyBoard' object has no setter

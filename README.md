@@ -1,3 +1,12 @@
 # Store
 Введение в ООП. Домашнее задание
+
 Магазин электроники - разработка классов для представления товаров магазина для проекта по созданию системы управления магазином электроники.
+
+Условия домашней работы состоит из шести домашек по модулю ООП. 
+1. https://skyengpublic.notion.site/6fcd858de7104dd1bbaccd7eecaacf1e
+2. https://skyengpublic.notion.site/ca739e0648114941b8f271901e3bda1c
+3. https://skyengpublic.notion.site/1ac29d4127ba4f74b39eda4529d412e2
+4. https://skyengpublic.notion.site/d7d33e0e7a074e82b9a8a699de87a6bb
+5. https://skyengpublic.notion.site/e19a9165887b45bda4ef08668704a5b3
+6. https://skyengpublic.notion.site/a6002bdf2f94423a8134587a7d86967b
